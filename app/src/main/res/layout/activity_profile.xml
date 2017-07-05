@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivUserBackgroundImage"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/user_header_height"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rlUserHeader"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_header_height"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ivUserPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:scaleType="fitCenter"
+            app:riv_corner_radius="5dip"
+            app:riv_mutate_background="true"
+            app:riv_tile_mode="repeat"
+            app:riv_oval="false"
+            app:riv_border_color="#ffffff"
+            app:riv_border_width="2dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_name"
+            android:id="@+id/tvUserName"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:layout_below="@+id/ivUserPhoto"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_screen_name"
+            android:id="@+id/tvUserScreenName"
+            android:layout_below="@+id/tvUserName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="600dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/tweet_text"
+            android:id="@+id/tvUserDescription"
+            android:layout_below="@+id/tvUserScreenName"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/tabs"
+        app:pstsShouldExpand="true"
+        app:pstsTextAllCaps="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlUserHeader"
+        app:pstsIndicatorColor="#BFE0EC"
+        app:pstsUnderlineColor="#BFE0EC"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabs"
+        android:background="@android:color/white" />
+
+    <!--<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:id="@+id/tlUserFollowStats"-->
+        <!--android:layout_below="@+id/rlUserHeader"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:stretchColumns="1"-->
+        <!--android:gravity="center">-->
+
+        <!--<TableRow>-->
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rlTweetCount"-->
+                <!--android:layout_width="0dip"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="10dip"-->
+                <!--android:layout_margin="4dip"-->
+                <!--android:layout_weight="1">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvTweetCountLabel"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/tweet_count_label"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textSize="10dp"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvTweetCount"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/tvTweetCountLabel"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textColor="#0084B4"-->
+                    <!--android:text="@string/tweet_count" />-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rlFollowingCount"-->
+                <!--android:layout_width="0dip"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="10dip"-->
+                <!--android:layout_margin="4dip"-->
+                <!--android:layout_weight="1">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvFollowingCountLabel"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/following_count_label"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textSize="10dp"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvFollowingCount"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/tvFollowingCountLabel"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textColor="#0084B4"-->
+                    <!--android:text="@string/following_count" />-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rlFollowersCount"-->
+                <!--android:layout_width="0dip"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="10dip"-->
+                <!--android:layout_margin="4dip"-->
+                <!--android:layout_weight="1">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvFollowersCountLabel"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/followers_count_label"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textSize="10dp"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvFollowersCount"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/tvFollowersCountLabel"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textColor="#0084B4"-->
+                    <!--android:text="@string/followers_count" />-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rlFavoritesCount"-->
+                <!--android:layout_width="0dip"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="10dip"-->
+                <!--android:layout_margin="4dip"-->
+                <!--android:layout_weight="1">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvFavoritesCountLabel"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/favorites_count_label"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textSize="10dp"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvFavoritesCount"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/tvFavoritesCountLabel"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textColor="#0084B4"-->
+                    <!--android:text="@string/favorites_count" />-->
+
+            <!--</RelativeLayout>-->
+
+        <!--</TableRow>-->
+    <!--</TableLayout>-->
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@+id/tlUserFollowStats"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:id="@+id/flContainer"/>-->
+
+</RelativeLayout>
