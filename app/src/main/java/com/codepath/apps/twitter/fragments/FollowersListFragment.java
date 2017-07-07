@@ -6,18 +6,17 @@ import android.util.Log;
 
 import com.codepath.apps.twitter.TwitterApplication;
 import com.codepath.apps.twitter.TwitterClient;
-import com.codepath.apps.twitter.adapters.UsersAdapter;
 import com.codepath.apps.twitter.constants.Extras;
-import com.codepath.apps.twitter.listeners.OnUserProfileClickListener;
 import com.codepath.apps.twitter.models.TwitterUser;
 import com.codepath.apps.twitter.models.UserListResults;
 
 import java.util.List;
 
 public class FollowersListFragment extends UserListFragment {
+    private Long nextCursor;
     private TwitterClient client;
     private Long userId;
-    private Long nextCursor;
+
 
     public static FollowersListFragment newInstance(Long userId) {
         FollowersListFragment fragment = new FollowersListFragment();
@@ -30,8 +29,9 @@ public class FollowersListFragment extends UserListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        client = TwitterApplication.getRestClient();
         userId = getArguments().getLong(Extras.USER_ID);
+        client = TwitterApplication.getRestClient();
+
         populateWithUsers();
     }
 
@@ -46,8 +46,10 @@ public class FollowersListFragment extends UserListFragment {
             @Override
             public void onSuccess(UserListResults userListResults) {
                 nextCursor = userListResults.getNextCursor();
+
                 clear();
                 addAll(userListResults.getUsers());
+
                 showLatest();
             }
 
@@ -65,7 +67,7 @@ public class FollowersListFragment extends UserListFragment {
             public void onSuccess(UserListResults userListResults) {
                 nextCursor = userListResults.getNextCursor();
                 List<TwitterUser> users = userListResults.getUsers();
-                addAll(users.isEmpty() ? users : users.subList(1, users.size()));
+                addAll(users.isEmpty() ? users : users.subList(1, users.size())); // the question mark is like a for loop
             }
 
             @Override

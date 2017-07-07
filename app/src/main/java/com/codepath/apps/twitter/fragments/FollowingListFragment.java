@@ -45,6 +45,7 @@ public class FollowingListFragment extends UserListFragment {
             public void onSuccess(UserListResults userListResults) {
                 nextCursor = userListResults.getNextCursor();
                 clear();
+                //displaying
                 addAll(userListResults.getUsers());
                 showLatest();
             }
@@ -55,6 +56,8 @@ public class FollowingListFragment extends UserListFragment {
             }
         });
     }
+
+
 
     @Override
     public void populateWithMoreUsers() {
@@ -73,6 +76,9 @@ public class FollowingListFragment extends UserListFragment {
         });
     }
 
+
+
+    //for errors
     private void logError(Throwable error) {
         Log.d("FOLLOWING_LIST", "Failed to retrieve following list", error);
     }

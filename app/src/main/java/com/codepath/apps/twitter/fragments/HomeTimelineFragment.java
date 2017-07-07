@@ -16,9 +16,11 @@ public class HomeTimelineFragment extends TweetListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         client = TwitterApplication.getRestClient();
+
         populateTimeline();
     }
 
+    //same as for most fragments
     @Override
     public void populateTimeline() {
         client.getHomeTimeline(new TwitterClient.TimelineResponseHandler() {
@@ -34,6 +36,10 @@ public class HomeTimelineFragment extends TweetListFragment {
                 logError(error);
             }
         });
+    }
+
+    private void logError(Throwable error) {
+        Log.d("HOME_TIMELINE", "Failed to retrieve tweets", error);
     }
 
 
@@ -52,8 +58,5 @@ public class HomeTimelineFragment extends TweetListFragment {
         }, oldestTweetId);
     }
 
-    private void logError(Throwable error) {
-        Log.d("HOME_TIMELINE", "Failed to retrieve tweets", error);
-    }
 
 }
