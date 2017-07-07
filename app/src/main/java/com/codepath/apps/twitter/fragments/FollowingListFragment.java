@@ -79,7 +79,5 @@ public class FollowingListFragment extends UserListFragment {
 
 
     //for errors
-    private void logError(Throwable error) {
-        Log.d("FOLLOWING_LIST", "Failed to retrieve following list", error);
-    }
+    private void logError(Throwable error) {Log.d("FOLLOWING_LIST", "Failed to retrieve following list", error);}
 }

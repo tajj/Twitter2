@@ -23,9 +23,10 @@ import java.util.List;
 
 public abstract class TweetListFragment extends Fragment implements OnTweetReplyClickListener {
     private TweetsAdapter aTweets;
+    private SwipeRefreshLayout swipeContainer;
     private List<Tweet> tweets;
     private ListView lvTweets;
-    private SwipeRefreshLayout swipeContainer;
+
 
     private ComposeTweetFragment composeTweetFragment;
 
@@ -33,6 +34,8 @@ public abstract class TweetListFragment extends Fragment implements OnTweetReply
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tweets_list, parent, false);
         setupSwitchRefreshLayout(v);
+
+
         lvTweets = (ListView) v.findViewById(R.id.lvTweets);
         lvTweets.setAdapter(aTweets);
         lvTweets.setOnScrollListener(new EndlessScrollListener() {
@@ -47,12 +50,14 @@ public abstract class TweetListFragment extends Fragment implements OnTweetReply
 
     private Long getOldestTweetId() {
         if (tweets.size() == 0) {
-            return 1L;
+            return 1L; //looked this up, thank u stackOverflow
         } else {
             Tweet tweet = tweets.get(tweets.size() - 1);
             return tweet.getId();
         }
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,8 @@ public abstract class TweetListFragment extends Fragment implements OnTweetReply
     @Override
     public void onTweetReplyClick(Tweet tweet) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+        //getting all the parts of the fragment
         composeTweetFragment = new ComposeTweetFragment();
         composeTweetFragment.setInReplyToStatusId(tweet.getId());
         composeTweetFragment.setInReplyToScreenName(tweet.getUser().getScreenName());
@@ -91,7 +98,7 @@ public abstract class TweetListFragment extends Fragment implements OnTweetReply
                 android.R.color.holo_red_light);
     }
 
-    //listener for progress bar ***
+    //listener for progress bar should be inserted here
 
 
 

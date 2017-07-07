@@ -68,8 +68,6 @@ public class FavoritesTimelineFragment extends TweetListFragment {
         }, oldestTweetId);
     }
 
-    private void logError(Throwable error) {
-        Log.d("FAVORITES_TIMELINE", "Failed to retrieve tweets", error);
-    }
+    private void logError(Throwable error) {Log.d("FAVORITES_TIMELINE", "Failed to retrieve tweets", error);}
 
 }

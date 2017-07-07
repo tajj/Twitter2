@@ -38,9 +38,7 @@ public class HomeTimelineFragment extends TweetListFragment {
         });
     }
 
-    private void logError(Throwable error) {
-        Log.d("HOME_TIMELINE", "Failed to retrieve tweets", error);
-    }
+    private void logError(Throwable error) {Log.d("HOME_TIMELINE", "Failed to retrieve tweets", error);}
 
 
     @Override

@@ -19,6 +19,7 @@ public class MentionsTimelineFragment extends TweetListFragment {
         populateTimeline();
     }
 
+    //literally the same as the last fragments lollllll :P
     @Override
     public void populateTimeline() {
         client.getMentionsTimeline(new TwitterClient.TimelineResponseHandler() {
@@ -51,8 +52,6 @@ public class MentionsTimelineFragment extends TweetListFragment {
         }, oldestTweetId);
     }
 
-    private void logError(Throwable error) {
-        Log.d("MENTIONS_TIMELINE", "Failed to retrieve tweets", error);
-    }
+    private void logError(Throwable error) {Log.d("MENTIONS_TIMELINE", "Failed to retrieve tweets", error);}
 
 }
