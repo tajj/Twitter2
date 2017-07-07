@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -20,6 +21,8 @@ import butterknife.ButterKnife;
 
 public class TimelineActivity extends BaseActivity { // implements tweets listener
     private TweetsPagerAdapter tPager;
+    MenuItem miActionProgressItem;
+
 
     @BindView(R.id.viewpager) ViewPager viewPager;
     @BindView(R.id.tabs) PagerSlidingTabStrip tabStrip;
@@ -35,10 +38,6 @@ public class TimelineActivity extends BaseActivity { // implements tweets listen
         viewPager.setAdapter(tPager);
         tabStrip.setViewPager(viewPager);
     }
-
-//hide and show progress bar in this file
-    //listener------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- itemselected listener context
-    //listener.onrefresh(true or false) <<<-----in HomeTimelineFragment
 
 
     public void showLatestHomeTimelineTweets() {
@@ -113,5 +112,32 @@ public class TimelineActivity extends BaseActivity { // implements tweets listen
             return tabTitles.length;
         }
     }
+
+
+    //@Override
+    // Refresh(boolean send){ miActionProgressItem.setVisible(send);}
+
+
+//    //Progress Bar Code
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        // Store instance of the menu item containing progress
+//        miActionProgressItem = menu.findItem(R.id.miProgress);
+//        // Extract the action-view from the menu item
+//        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+//        // Return to finish
+//        return super.onPrepareOptionsMenu(menu);
+//    }
+//
+//    public void showProgressBar() {
+//        // Show progress item
+//        miActionProgressItem.setVisible(true);
+//    }
+//
+//    public void hideProgressBar() {
+//        // Hide progress item
+//        miActionProgressItem.setVisible(false);
+//    }
+//    // LISTENER IN TIMELINE
 
 }

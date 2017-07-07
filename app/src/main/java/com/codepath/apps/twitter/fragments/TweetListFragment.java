@@ -26,6 +26,7 @@ public abstract class TweetListFragment extends Fragment implements OnTweetReply
     private List<Tweet> tweets;
     private ListView lvTweets;
     private SwipeRefreshLayout swipeContainer;
+
     private ComposeTweetFragment composeTweetFragment;
 
     @Override
@@ -90,7 +91,9 @@ public abstract class TweetListFragment extends Fragment implements OnTweetReply
                 android.R.color.holo_red_light);
     }
 
-    //listener for progress bar
+    //listener for progress bar ***
+
+
 
     public abstract void populateTimeline();
 

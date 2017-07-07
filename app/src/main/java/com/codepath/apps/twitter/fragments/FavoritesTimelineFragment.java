@@ -16,6 +16,7 @@ public class FavoritesTimelineFragment extends TweetListFragment {
 
     public static FavoritesTimelineFragment newInstance(Long userId) {
         FavoritesTimelineFragment fragment = new FavoritesTimelineFragment();
+
         Bundle args = new Bundle();
         args.putLong(Extras.USER_ID, userId);
         fragment.setArguments(args);

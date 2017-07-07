@@ -25,10 +25,10 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class UsersAdapter extends ArrayAdapter<TwitterUser> {
-    private static final String TAG = "USER_ADAPTER";
-    private OnUserProfileClickListener listener;
-    private TwitterClient client;
     private Long authenticatedUserId;
+    private static final String TAG = "USER_ADAPTER";
+    private TwitterClient client;
+    private OnUserProfileClickListener listener;
 
     public UsersAdapter(Context context, List<TwitterUser> users, OnUserProfileClickListener listener, Long authenticatedUserId) {
         super(context, android.R.layout.simple_list_item_1, users);
@@ -39,33 +39,34 @@ public class UsersAdapter extends ArrayAdapter<TwitterUser> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final vHolder vHolder;
         final TwitterUser user = getItem(position);
-        final ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_user, parent, false);
-            viewHolder = new ViewHolder();
-            viewHolder.rlUserHeader = (RelativeLayout) convertView.findViewById(R.id.rlUserHeader);
-            viewHolder.ivBackgroundImage = (ImageView) convertView.findViewById(R.id.ivUserBackgroundImage);
-            viewHolder.btnFollow = (Button) convertView.findViewById(R.id.btnFollow);
-            convertView.setTag(viewHolder);
+            vHolder = new vHolder();
+            vHolder.rlUserHeader = (RelativeLayout) convertView.findViewById(R.id.rlUserHeader);
+            vHolder.ivBackgroundImage = (ImageView) convertView.findViewById(R.id.ivUserBackgroundImage);
+            vHolder.btnFollow = (Button) convertView.findViewById(R.id.btnFollow);
+            convertView.setTag(vHolder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            vHolder = (vHolder) convertView.getTag();
         }
+
         TextView tvUserDescription = (TextView) convertView.findViewById(R.id.tvUserDescription);
+
         tvUserDescription.setText(user.getDescription());
-        if (user.getId().equals(authenticatedUserId)) {
-            viewHolder.btnFollow.setVisibility(View.INVISIBLE);
+        if (user.getId().equals(authenticatedUserId)) {vHolder.btnFollow.setVisibility(View.INVISIBLE);
         } else {
             client.lookupFriendship(authenticatedUserId, user.getId(), new TwitterClient.FriendshipLookupResponseHandler() {
                 @Override
                 public void onSuccess(FriendshipLookupResult result) {
                     FriendshipSource source = result.getRelationship().getSource();
-                    setupFollowButton(user.getId(), source.isFollowing(), viewHolder);
+                    setupFollowButton(user.getId(), source.isFollowing(), vHolder);
                 }
 
                 @Override
                 public void onFailure(Throwable error) {
-                    Log.e("USER_ADAPTER", "Failed to lookup friend", error);
+                    Log.e("USER_ADAPTER", "Error: Could not look up friend", error);
                 }
             });
         }
@@ -85,27 +86,27 @@ public class UsersAdapter extends ArrayAdapter<TwitterUser> {
         TextView tvUserScreenName = (TextView) convertView.findViewById(R.id.tvUserScreenName);
         tvUserScreenName.setText("@" + user.getScreenName());
         final String backgroundImageUrl = user.getProfileBackgroundImageUrl();
-        viewHolder.ivBackgroundImage.setImageResource(0);
+        vHolder.ivBackgroundImage.setImageResource(0);
         if (backgroundImageUrl != null && backgroundImageUrl != "") {
-            Picasso.with(getContext()).load(backgroundImageUrl).into(viewHolder.ivBackgroundImage);
+            Picasso.with(getContext()).load(backgroundImageUrl).into(vHolder.ivBackgroundImage);
         } else {
-            setHeaderBackgroundColor(viewHolder.rlUserHeader, user.getProfileBackgroundColor());
+            setHeaderBackgroundColor(vHolder.rlUserHeader, user.getProfileBackgroundColor());
         }
         return convertView;
     }
 
-    private void setupFollowButton(final Long userId, boolean isFollowing, final ViewHolder viewHolder) {
+    private void setupFollowButton(final Long userId, boolean isFollowing, final vHolder vHolder) {
         if (isFollowing) {
-            viewHolder.btnFollow.setTextColor(Color.parseColor("#FFFFFF"));
-            viewHolder.btnFollow.setBackgroundResource(R.drawable.following_button);
-            viewHolder.btnFollow.setText(R.string.unfollow);
-            viewHolder.btnFollow.setOnClickListener(new View.OnClickListener() {
+            vHolder.btnFollow.setTextColor(Color.parseColor("#FFFFFF"));
+            vHolder.btnFollow.setBackgroundResource(R.drawable.following_button);
+            vHolder.btnFollow.setText(R.string.unfollow);
+            vHolder.btnFollow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     TwitterApplication.getRestClient().unfollow(userId, new TwitterClient.TwitterUserResponseHandler() {
                         @Override
                         public void onSuccess(TwitterUser user) {
-                            setupFollowButton(userId, false, viewHolder);
+                            setupFollowButton(userId, false, vHolder);
                         }
 
                         @Override
@@ -116,21 +117,21 @@ public class UsersAdapter extends ArrayAdapter<TwitterUser> {
                 }
             });
         } else {
-            viewHolder.btnFollow.setTextColor(Color.parseColor("#89000000"));
-            viewHolder.btnFollow.setBackgroundResource(R.drawable.not_following_button);
-            viewHolder.btnFollow.setText(R.string.follow);
-            viewHolder.btnFollow.setOnClickListener(new View.OnClickListener() {
+            vHolder.btnFollow.setTextColor(Color.parseColor("#89000000"));
+            vHolder.btnFollow.setBackgroundResource(R.drawable.not_following_button);
+            vHolder.btnFollow.setText(R.string.follow);
+            vHolder.btnFollow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     TwitterApplication.getRestClient().follow(userId, new TwitterClient.TwitterUserResponseHandler() {
                         @Override
                         public void onSuccess(TwitterUser user) {
-                            setupFollowButton(userId, true, viewHolder);
+                            setupFollowButton(userId, true, vHolder);
                         }
 
                         @Override
                         public void onFailure(Throwable error) {
-                            Log.e(TAG, "Failed to follow friend", error);
+                            Log.e(TAG, "Error: Could not follow friend", error);
                         }
                     });
                 }
@@ -138,15 +139,16 @@ public class UsersAdapter extends ArrayAdapter<TwitterUser> {
         }
     }
 
+    //getting the header color
     private void setHeaderBackgroundColor(RelativeLayout rlUserHeader, String backgroundColor) {
         if (rlUserHeader != null && backgroundColor != null) {
             rlUserHeader.setBackgroundColor(Color.parseColor("#" + backgroundColor));
         }
     }
 
-    public static class ViewHolder {
-        ImageView ivBackgroundImage;
+    public static class vHolder {
         RelativeLayout rlUserHeader;
+        ImageView ivBackgroundImage;
         Button btnFollow;
     }
 

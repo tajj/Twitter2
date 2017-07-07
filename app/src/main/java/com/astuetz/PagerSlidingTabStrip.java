@@ -49,20 +49,21 @@ import java.util.Locale;
 @SuppressLint("NewApi")
 public class PagerSlidingTabStrip extends HorizontalScrollView {
 
-    public interface IconTabProvider {
-        public int getPageIconResId(int position);
-    }
 
     public interface ViewTabProvider {
-        public View getPageView(int position);
+        View getPageView(int position);
     }
 
-    // @formatter:off
+    public interface IconTabProvider {
+         int getPageIconResId(int position);
+    }
+
+
+
     private static final int[] ATTRS = new int[] {
             android.R.attr.textSize,
             android.R.attr.textColor
     };
-    // @formatter:on
 
     private LinearLayout.LayoutParams defaultTabLayoutParams;
     private LinearLayout.LayoutParams expandedTabLayoutParams;
@@ -80,7 +81,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
     private Paint rectPaint;
     private Paint dividerPaint;
-    //2980b9
     private int indicatorColor = 0xFF666666;
     private int underlineColor = 0x1A000000;
     private int dividerColor = 0x1A000000;
@@ -240,6 +240,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         tab.setText(title);
         tab.setGravity(Gravity.CENTER);
         tab.setSingleLine();
+       // tab.setIcon(getResources().getDrawable(R.drawable.ic_launcher))  // use what icon you need
+
 
         addTab(position, tab);
     }
@@ -249,7 +251,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         ImageButton tab = new ImageButton(getContext());
         tab.setImageResource(resId);
 
-        addTab(position, tab);
+        addTab(position, tab)
+        ;
 
     }
 
@@ -263,6 +266,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         });
 
         tab.setPadding(tabPadding, 0, tabPadding, 0);
+
         tabsContainer.addView(tab, position, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
     }
 
@@ -281,8 +285,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
                 tab.setTypeface(tabTypeface, tabTypefaceStyle);
                 tab.setTextColor(tabTextColor);
 
-                // setAllCaps() is only available from API 14, so the upper case is made manually if we are on a
-                // pre-ICS-build
+
                 if (textAllCaps) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                         tab.setAllCaps(true);

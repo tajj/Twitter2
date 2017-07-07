@@ -41,6 +41,8 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
         this.onTweetReplyClickListener = onTweetReplyClickListener;
     }
 
+    //    @BindView(R.id.tvTweetId) TextView tvTweetId;
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Tweet tweet = getItem(position);
@@ -48,6 +50,8 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_tweet, parent, false);
         }
+
+        //ButterKnife.bind(this, convertView);
         setupMedia(convertView, tweet);
         TextView tvTweetId = (TextView) convertView.findViewById(R.id.tvTweetId);
         tvTweetId.setText(String.valueOf(tweet.getId()));
@@ -75,6 +79,7 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
             Log.d("TWEET", "uh oh", e);
         }
         ImageView ivReply = (ImageView) convertView.findViewById(R.id.ivReply);
+
         ivReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,9 +94,9 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
                 if (MotionEvent.ACTION_UP == event.getAction()) {
                     TextView tvTweetId = (TextView) v.findViewById(R.id.tvTweetId);
                     Long id = Long.parseLong(tvTweetId.getText().toString());
-                    Intent intent = new Intent(getContext(), TweetDetailsActivity.class);
-                    intent.putExtra(Extras.TWEET_ID, id);
-                    getContext().startActivity(intent);
+                    Intent i = new Intent(getContext(), TweetDetailsActivity.class);
+                    i.putExtra(Extras.TWEET_ID, id);
+                    getContext().startActivity(i);
                 }
                 return true;
             }

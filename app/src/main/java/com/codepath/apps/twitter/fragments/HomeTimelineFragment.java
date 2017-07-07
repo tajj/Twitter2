@@ -36,6 +36,7 @@ public class HomeTimelineFragment extends TweetListFragment {
         });
     }
 
+
     @Override
     public void populateWithOlderTweets(Long oldestTweetId) {
         client.getOlderHomeTimeline(new TwitterClient.TimelineResponseHandler() {

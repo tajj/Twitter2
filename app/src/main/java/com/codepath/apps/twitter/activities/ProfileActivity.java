@@ -41,7 +41,6 @@ public class ProfileActivity extends BaseActivity {
     private TwitterClient client;
     private Long userId;
     private TwitterUser tu;
-//    MenuItem miActionProgressItem;
 
 
     private ProfilePagerAdapter aPager;
@@ -95,27 +94,6 @@ public class ProfileActivity extends BaseActivity {
         });
     }
 
-
-//    //Progress Bar Code
-//    @Override
-//    public boolean onPrepareOptionsMenu(Menu menu) {
-//        // Store instance of the menu item containing progress
-//        miActionProgressItem = menu.findItem(R.id.miActionProgress);
-//        // Extract the action-view from the menu item
-//        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
-//        // Return to finish
-//        return super.onPrepareOptionsMenu(menu);
-//    }
-//
-//    public void showProgressBar() {
-//        // Show progress item
-//        miActionProgressItem.setVisible(true);
-//    //}
-//
-//    public void hideProgressBar() {
-//        // Hide progress item
-//        miActionProgressItem.setVisible(false);
-//    }
 
 
     @Override
